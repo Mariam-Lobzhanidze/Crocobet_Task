@@ -1,13 +1,13 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component } from "@angular/core";
+import { RouterOutlet } from "@angular/router";
+import { HeaderComponent } from "./header/header.component";
+import { NavigationComponent } from "./navigation/navigation.component";
 
 @Component({
-  selector: 'app-root',
+  selector: "app-root",
   standalone: true,
-  imports: [RouterOutlet],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  imports: [RouterOutlet, HeaderComponent, NavigationComponent],
+  templateUrl: "./app.component.html",
+  styleUrl: "./app.component.scss",
 })
-export class AppComponent {
-  title = 'crocobet_task_app';
-}
+export class AppComponent {}

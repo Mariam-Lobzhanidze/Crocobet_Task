@@ -1,0 +1,21 @@
+.header {
+  background-color: rgb(248, 245, 245);
+  padding: 15px;
+
+  &-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto;
+    max-width: 1200px;
+  }
+
+  &-logo {
+    color: #074b5c;
+    text-transform: uppercase;
+
+    span {
+      color: #ee9564;
+    }
+  }
+}
