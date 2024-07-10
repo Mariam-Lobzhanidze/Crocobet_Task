@@ -1,11 +1,12 @@
 import { CommonModule } from "@angular/common";
 import { Component, OnDestroy, OnInit } from "@angular/core";
+import { RouterLink } from "@angular/router";
 import { interval, Subject, takeUntil } from "rxjs";
 
 @Component({
   selector: "app-header",
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: "./header.component.html",
   styleUrl: "./header.component.scss",
 })
