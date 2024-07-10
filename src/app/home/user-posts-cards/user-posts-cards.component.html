@@ -1,1 +1,6 @@
-<p>user-posts-cards works!</p>
+<div class="container">
+  <h2>User Posts Cards</h2>
+  <div class="cards">
+    <app-card *ngFor="let post of activeUserPostsData" [post]="post"></app-card>
+  </div>
+</div>

@@ -1,1 +1,33 @@
-<p>posts works!</p>
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  <ng-container matColumnDef="userName">
+    <th mat-header-cell *matHeaderCellDef> Username</th>
+    <td mat-cell *matCellDef="let element"> {{ element.username }} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="postTitle">
+    <th mat-header-cell *matHeaderCellDef> Post Title </th>
+    <td mat-cell *matCellDef="let element"> {{ element.title }} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="action">
+    <th mat-header-cell *matHeaderCellDef>---------</th>
+    <td mat-cell *matCellDef="let element">
+      <button (click)="openDetailsDialog(element)" class="details-btn" mat-raised-button>Details</button></td
+    >
+  </ng-container>
+  >
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>
+
+<ng-template #detailsDialogTemplate let-data>
+  <!-- <h1 mat-dialog-title>Post Details</h1> -->
+  <div class="info" mat-dialog-content>
+    <p class="info-title">{{ data.title }}</p>
+    <p class="info-details"> {{ data.details }}</p>
+  </div>
+  <div class="action-btn" mat-dialog-actions>
+    <!-- <button mat-button mat-dialog-close>Close</button> -->
+  </div>
+</ng-template>

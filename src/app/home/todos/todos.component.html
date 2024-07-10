@@ -1,0 +1,10 @@
+<div class="container">
+  <h2>User's to do list</h2>
+  <div class="todos">
+    <ng-container *ngFor="let todo of activeUserToDoData">
+      <div class="todos-item" [ngClass]="{ 'todos-completed': todo.completed }">
+        ({{ todo.id }}) {{ todo.title }}</div
+      >
+    </ng-container>
+  </div>
+</div>

@@ -1,0 +1,41 @@
+table {
+  th {
+    color: #2f4858;
+    font-weight: 600;
+  }
+  .details-btn {
+    background-color: #2f4858;
+    color: #fff;
+    transition: all 0.3s ease;
+    position: relative;
+  }
+
+  .details-btn:hover {
+    background-color: transparent;
+    color: #333;
+  }
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  row-gap: 30px;
+
+  &-title {
+    color: #2f4858;
+    font-weight: 600;
+    align-self: center;
+  }
+
+  &-details {
+    font-weight: 500;
+  }
+}
+
+.action-btn {
+  button {
+    margin-top: 15px;
+    background-color: #412728;
+    color: #fff;
+  }
+}

@@ -2,33 +2,31 @@ import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { UserDataService } from "../../services/userdata.service";
 import { map } from "rxjs";
-import { CardComponent } from "./card/card.component";
 import { CommonModule } from "@angular/common";
 
 @Component({
-  selector: "app-user-posts-cards",
+  selector: "app-todos",
   standalone: true,
-  imports: [CardComponent, CommonModule],
-  templateUrl: "./user-posts-cards.component.html",
-  styleUrl: "./user-posts-cards.component.scss",
+  imports: [CommonModule],
+  templateUrl: "./todos.component.html",
+  styleUrl: "./todos.component.scss",
 })
-export class UserPostsCardsComponent implements OnInit {
+export class ToDoComponent implements OnInit {
   private userId: number | undefined;
-  public activeUserPostsData: any;
-
+  public activeUserToDoData: any;
   public constructor(private route: ActivatedRoute, private userDataService: UserDataService) {}
 
   public ngOnInit(): void {
     this.userId = +this.route.snapshot.params["userId"];
 
     this.userDataService
-      .getUsersPosts()
-      .pipe(map((posts: any[]) => posts.filter((post) => post.userId === this.userId)))
+      .getUsersToDo()
+      .pipe(map((todos: any[]) => todos.filter((todo) => todo.userId === this.userId)))
       .subscribe((posts) => {
-        this.activeUserPostsData = posts;
+        this.activeUserToDoData = posts;
 
         // this.userDataService.userPostsData = this.activeUserPostsData;
-        console.log(this.activeUserPostsData);
+        console.log(this.activeUserToDoData);
       });
   }
 }

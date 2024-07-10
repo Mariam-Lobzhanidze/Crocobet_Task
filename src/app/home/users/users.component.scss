@@ -1,4 +1,35 @@
-.usersTableContainer {
+.usersContainer {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+  .search {
+    position: relative;
+    &-input {
+      width: 100%;
+      height: 50px;
+      background-color: #edebeb;
+      border: none;
+      outline: none;
+      border-bottom: 3px solid #2f4858;
+      padding: 6px 12px;
+      font-size: 16px;
+    }
+
+    span svg {
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+    }
+  }
+
+  table th {
+    color: #2f4858;
+    font-weight: 600;
+  }
   .posts-btn {
     background-color: #2f4858;
     color: #fff;
@@ -29,5 +60,35 @@
     opacity: 1;
     top: 50%;
     transform: translate(-160%, -50%);
+  }
+
+  .todo-btn {
+    background-color: #ee9564;
+  }
+
+  .todo-btn:hover {
+    color: #ee9564;
+  }
+
+  .posts-btn.todo-btn::after {
+    background-color: #ee9564;
+  }
+
+  .not-found-message {
+    display: flex;
+    flex-direction: column;
+    row-gap: 25px;
+    align-items: center;
+    margin-top: 100px;
+
+    p {
+      color: #2f4858;
+      font-weight: 600;
+    }
+
+    span svg {
+      width: 60px;
+      height: 60px;
+    }
   }
 }
