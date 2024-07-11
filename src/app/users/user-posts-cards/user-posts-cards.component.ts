@@ -4,6 +4,7 @@ import { UserDataService } from "../../services/userdata.service";
 import { map } from "rxjs";
 import { CardComponent } from "./card/card.component";
 import { CommonModule } from "@angular/common";
+import { Post } from "../../interfaces/post.interface";
 
 @Component({
   selector: "app-user-posts-cards",
@@ -14,19 +15,18 @@ import { CommonModule } from "@angular/common";
 })
 export class UserPostsCardsComponent implements OnInit {
   private userId: number | undefined;
-  public activeUserPostsData: any;
+  public activeUserPostsData!: Post[];
 
   public constructor(private route: ActivatedRoute, private userDataService: UserDataService) {}
 
   public ngOnInit(): void {
     this.userId = +this.route.snapshot.params["id"];
-    console.log(this.route.snapshot.params["id"]);
 
     this.userDataService
       .getUsersPosts()
-      .pipe(map((posts: any[]) => posts.filter((post) => post.userId === this.userId)))
+      .pipe(map((posts: Post[]) => posts.filter((post: Post) => post.userId === this.userId)))
       .subscribe(
-        (posts) => {
+        (posts: Post[]) => {
           this.activeUserPostsData = posts;
         },
         (error) => {

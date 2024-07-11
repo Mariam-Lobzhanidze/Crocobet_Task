@@ -22,83 +22,84 @@
       </svg>
     </span>
   </div>
+  <div class="inner">
+    <ng-container *ngIf="!searchResultState; else loadTable">
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef> Name </th>
+          <td mat-cell *matCellDef="let element"> {{ element.firstName }} </td>
+        </ng-container>
 
-  <ng-container *ngIf="!searchResultState; else loadTable">
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-      <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef> Name </th>
-        <td mat-cell *matCellDef="let element"> {{ element.firstName }} </td>
-      </ng-container>
+        <ng-container matColumnDef="lastName">
+          <th mat-header-cell *matHeaderCellDef> LastName </th>
+          <td mat-cell *matCellDef="let element"> {{ element.lastName }} </td>
+        </ng-container>
 
-      <ng-container matColumnDef="lastName">
-        <th mat-header-cell *matHeaderCellDef> LastName </th>
-        <td mat-cell *matCellDef="let element"> {{ element.lastName }} </td>
-      </ng-container>
+        <ng-container matColumnDef="phone">
+          <th mat-header-cell *matHeaderCellDef> Phone </th>
+          <td mat-cell *matCellDef="let element"> {{ element.phone }} </td>
+        </ng-container>
 
-      <ng-container matColumnDef="phone">
-        <th mat-header-cell *matHeaderCellDef> Phone </th>
-        <td mat-cell *matCellDef="let element"> {{ element.phone }} </td>
-      </ng-container>
+        <ng-container matColumnDef="email">
+          <th mat-header-cell *matHeaderCellDef> Email </th>
+          <td mat-cell *matCellDef="let element"> {{ element.email }} </td>
+        </ng-container>
 
-      <ng-container matColumnDef="email">
-        <th mat-header-cell *matHeaderCellDef> Email </th>
-        <td mat-cell *matCellDef="let element"> {{ element.email }} </td>
-      </ng-container>
+        <ng-container matColumnDef="company name">
+          <th mat-header-cell *matHeaderCellDef> Company Name </th>
+          <td mat-cell *matCellDef="let element"> {{ element.company.name }} </td>
+        </ng-container>
 
-      <ng-container matColumnDef="company name">
-        <th mat-header-cell *matHeaderCellDef> Company Name </th>
-        <td mat-cell *matCellDef="let element"> {{ element.company.name }} </td>
-      </ng-container>
+        <ng-container matColumnDef="post">
+          <th mat-header-cell *matHeaderCellDef>Post Cards</th>
+          <td mat-cell *matCellDef="let element">
+            <button
+              (click)="onUserPostsPage(element.id)"
+              class="posts-btn"
+              routerLink="home/users"
+              routerLinkActive="active"
+              mat-raised-button
+              >Posts</button
+            ></td
+          >
+        </ng-container>
 
-      <ng-container matColumnDef="post">
-        <th mat-header-cell *matHeaderCellDef>---------</th>
-        <td mat-cell *matCellDef="let element">
-          <button
-            (click)="onUserPostsPage(element.id)"
-            class="posts-btn"
-            routerLink="home/users"
-            routerLinkActive="active"
-            mat-raised-button
-            >Posts</button
-          ></td
-        >
-      </ng-container>
+        <ng-container matColumnDef="todo">
+          <th mat-header-cell *matHeaderCellDef>To do list</th>
+          <td mat-cell *matCellDef="let element">
+            <button
+              (click)="onToDoListPage(element.id)"
+              class="posts-btn todo-btn"
+              routerLink="home/users"
+              routerLinkActive="active"
+              mat-raised-button
+              >To do</button
+            ></td
+          >
+        </ng-container>
 
-      <ng-container matColumnDef="todo">
-        <th mat-header-cell *matHeaderCellDef>--------</th>
-        <td mat-cell *matCellDef="let element">
-          <button
-            (click)="onToDoListPage(element.id)"
-            class="posts-btn todo-btn"
-            routerLink="home/users"
-            routerLinkActive="active"
-            mat-raised-button
-            >To do</button
-          ></td
-        >
-      </ng-container>
-
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-    </table>
-  </ng-container>
-  <ng-template #loadTable>
-    <div class="not-found-message">
-      <p>No results found </p>
-      <span>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke-width="1.5"
-          stroke="#2f4858"
-          class="size-6">
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z" />
-        </svg>
-      </span>
-    </div>
-  </ng-template>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+    </ng-container>
+    <ng-template #loadTable>
+      <div class="not-found-message">
+        <p>No results found </p>
+        <span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="#2f4858"
+            class="size-6">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z" />
+          </svg>
+        </span>
+      </div>
+    </ng-template>
+  </div>
 </div>

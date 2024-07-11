@@ -1,25 +1,29 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
+import { User } from "../interfaces/user.interface";
+import { Post } from "../interfaces/post.interface";
+import { Todo } from "../interfaces/todo.interface";
 
 @Injectable({
   providedIn: "root",
 })
 export class UserDataService {
-  // public userPostsData: any;
+  public usersData!: User[];
+
   private baseUrl = "https://jsonplaceholder.typicode.com";
 
   constructor(private http: HttpClient) {}
 
-  public getUsersPosts(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/posts`);
+  public getUsersPosts(): Observable<Post[]> {
+    return this.http.get<Post[]>(`${this.baseUrl}/posts`);
   }
 
-  public getUsers(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/users`);
+  public getUsers(): Observable<User[]> {
+    return this.http.get<User[]>(`${this.baseUrl}/users`);
   }
 
-  public getUsersToDo(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/todos`);
+  public getUsersToDo(): Observable<Todo[]> {
+    return this.http.get<Todo[]>(`${this.baseUrl}/todos`);
   }
 }

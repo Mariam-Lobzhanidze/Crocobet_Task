@@ -4,6 +4,7 @@ import { UserDataService } from "../services/userdata.service";
 import { MatButtonModule } from "@angular/material/button";
 import { ActivatedRoute, Router } from "@angular/router";
 import { CommonModule } from "@angular/common";
+import { User } from "../interfaces/user.interface";
 
 @Component({
   selector: "app-users",
@@ -15,7 +16,7 @@ import { CommonModule } from "@angular/common";
 export class UsersComponent implements OnInit {
   public searchResultState = false;
 
-  public dataSource = new MatTableDataSource();
+  public dataSource = new MatTableDataSource<User>();
   public displayedColumns: String[] = ["name", "lastName", "phone", "email", "company name", "post", "todo"];
 
   public constructor(
@@ -25,8 +26,18 @@ export class UsersComponent implements OnInit {
   ) {}
 
   public ngOnInit(): void {
+    if (!this.usersDataService.usersData) {
+      this.getUsersData();
+    } else {
+      this.dataSource.data = this.usersDataService.usersData;
+    }
+  }
+
+  private getUsersData(): void {
     this.usersDataService.getUsers().subscribe(
-      (usersData) => {
+      (usersData: User[]) => {
+        console.log(usersData);
+
         this.dataSource.data = usersData.map((user: any) => {
           const [firstName, lastName] = user.name.split(" ");
 
@@ -36,6 +47,9 @@ export class UsersComponent implements OnInit {
             lastName: lastName,
           };
         });
+
+        // add to service
+        this.usersDataService.usersData = this.dataSource.data;
       },
       (error) => {
         console.log(error);
@@ -54,7 +68,7 @@ export class UsersComponent implements OnInit {
   public applyFilter(e: Event): void {
     const filterValue = (e.target as HTMLInputElement).value.trim().toLowerCase();
 
-    this.dataSource.filterPredicate = (data: any, filter: string): boolean => {
+    this.dataSource.filterPredicate = (data: User, filter: string): boolean => {
       const optionsForFiltering = [
         data.firstName.toLowerCase(),
         data.email.toLowerCase(),

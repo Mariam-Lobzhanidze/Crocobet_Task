@@ -1,0 +1,44 @@
+.home-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px;
+  align-items: center;
+  padding: 0px 15px;
+
+  @media (max-width: 1024px) {
+    grid-template-columns: 1fr;
+  }
+
+  .home-title {
+    display: flex;
+    flex-direction: column;
+    row-gap: 30px;
+
+    h1 {
+      color: #ee9564;
+      @media (max-width: 768px) {
+        font-size: 24px;
+      }
+    }
+
+    p {
+      font-size: 18px;
+      line-height: 1.2;
+      color: #333;
+      @media (max-width: 768px) {
+        font-size: 16px;
+      }
+    }
+  }
+
+  .home-img {
+    width: 500px;
+    justify-self: center;
+
+    @media (max-width: 600px) {
+      width: 340px;
+    }
+  }
+}

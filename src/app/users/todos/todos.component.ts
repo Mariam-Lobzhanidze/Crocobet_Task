@@ -3,6 +3,7 @@ import { ActivatedRoute } from "@angular/router";
 import { UserDataService } from "../../services/userdata.service";
 import { map } from "rxjs";
 import { CommonModule } from "@angular/common";
+import { Todo } from "../../interfaces/todo.interface";
 
 @Component({
   selector: "app-todos",
@@ -13,7 +14,7 @@ import { CommonModule } from "@angular/common";
 })
 export class ToDoComponent implements OnInit {
   private userId: number | undefined;
-  public activeUserToDoData: any;
+  public activeUserToDoData!: Todo[];
   public constructor(private route: ActivatedRoute, private userDataService: UserDataService) {}
 
   public ngOnInit(): void {
@@ -21,8 +22,8 @@ export class ToDoComponent implements OnInit {
 
     this.userDataService
       .getUsersToDo()
-      .pipe(map((todos: any[]) => todos.filter((todo) => todo.userId === this.userId)))
-      .subscribe((todos) => {
+      .pipe(map((todos: Todo[]) => todos.filter((todo: Todo) => todo.userId === this.userId)))
+      .subscribe((todos: Todo[]) => {
         this.activeUserToDoData = todos;
       });
   }

@@ -4,6 +4,8 @@
   display: flex;
   flex-direction: column;
   row-gap: 10px;
+
+  padding: 0px 15px;
   .search {
     position: relative;
     &-input {
@@ -28,69 +30,79 @@
     }
   }
 
-  table th {
-    color: #2f4858;
-    font-weight: 600;
-  }
-  .posts-btn {
-    background-color: #2f4858;
-    color: #fff;
-    transition: all 0.3s ease;
-    position: relative;
-  }
+  .inner {
+    overflow-x: auto;
+    table {
+      white-space: nowrap;
+      margin: 0 auto;
+      width: 100%;
 
-  .posts-btn:hover {
-    background-color: transparent;
-    color: #333;
-  }
-
-  .posts-btn::after {
-    content: "";
-    position: absolute;
-    left: 0px;
-    width: 8px;
-    height: 8px;
-    background-color: #2f4858;
-    border-radius: 50%;
-    opacity: 0;
-    transition: opacity 0.3s ease, transform 0.3s ease;
-    transform: translateY(-50%);
-    top: 50%;
-  }
-
-  .posts-btn:hover::after {
-    opacity: 1;
-    top: 50%;
-    transform: translate(-160%, -50%);
-  }
-
-  .todo-btn {
-    background-color: #ee9564;
-  }
-
-  .todo-btn:hover {
-    color: #ee9564;
-  }
-
-  .posts-btn.todo-btn::after {
-    background-color: #ee9564;
-  }
-
-  .not-found-message {
-    display: flex;
-    flex-direction: column;
-    row-gap: 25px;
-    align-items: center;
-    margin-top: 100px;
-
-    p {
-      color: #2f4858;
-      font-weight: 600;
+      th {
+        color: #2f4858;
+        font-weight: 600;
+      }
     }
 
-    span svg {
-      width: 60px;
-      height: 60px;
+    .posts-btn {
+      background-color: #2f4858;
+      color: #fff;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .posts-btn:hover {
+      background-color: transparent;
+      color: #333;
+    }
+
+    .posts-btn::after {
+      content: "";
+      position: absolute;
+      left: 0px;
+      width: 8px;
+      height: 8px;
+      background-color: #2f4858;
+      border-radius: 50%;
+      opacity: 0;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      transform: translateY(-50%);
+      top: 50%;
+    }
+
+    .posts-btn:hover::after {
+      opacity: 1;
+      top: 50%;
+      transform: translate(-160%, -50%);
+    }
+
+    .todo-btn {
+      background-color: #ee9564;
+    }
+
+    .todo-btn:hover {
+      color: #ee9564;
+    }
+
+    .posts-btn.todo-btn::after {
+      background-color: #ee9564;
+    }
+
+    .not-found-message {
+      display: flex;
+      flex-direction: column;
+      row-gap: 25px;
+      align-items: center;
+      margin-top: 100px;
+
+      p {
+        color: #2f4858;
+        font-weight: 600;
+      }
+
+      span svg {
+        width: 60px;
+        height: 60px;
+      }
     }
   }
 }

@@ -1,23 +1,29 @@
 .posts-wrapper {
   width: 50%;
   margin: 0 auto;
-  padding: 0px 20px;
 
-  table {
-    th {
-      color: #2f4858;
-      font-weight: 600;
-    }
-    .details-btn {
-      background-color: #2f4858;
-      color: #fff;
-      transition: all 0.3s ease;
-      position: relative;
-    }
+  @media (max-width: 1024px) {
+    width: 80%;
+  }
 
-    .details-btn:hover {
-      background-color: transparent;
-      color: #333;
+  .inner {
+    overflow-x: auto;
+    table {
+      th {
+        color: #2f4858;
+        font-weight: 600;
+      }
+      .details-btn {
+        background-color: #2f4858;
+        color: #fff;
+        transition: all 0.3s ease;
+        position: relative;
+      }
+
+      .details-btn:hover {
+        background-color: transparent;
+        color: #333;
+      }
     }
   }
 }
@@ -42,11 +48,5 @@
 
   &-details {
     font-weight: 500;
-  }
-}
-
-@media (max-width: 1024px) {
-  .posts-wrapper {
-    width: 80%;
   }
 }

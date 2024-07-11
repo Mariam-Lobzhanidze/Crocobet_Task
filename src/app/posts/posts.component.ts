@@ -1,9 +1,11 @@
 import { Component, OnInit, TemplateRef, ViewChild } from "@angular/core";
 import { UserDataService } from "../services/userdata.service";
 import { MatTableDataSource, MatTableModule } from "@angular/material/table";
-import { forkJoin } from "rxjs";
+import { switchMap, tap } from "rxjs";
 import { MatButtonModule } from "@angular/material/button";
 import { MatDialog, MatDialogModule, MatDialogRef } from "@angular/material/dialog";
+import { Post } from "../interfaces/post.interface";
+import { User } from "../interfaces/user.interface";
 
 @Component({
   selector: "app-posts",
@@ -13,6 +15,8 @@ import { MatDialog, MatDialogModule, MatDialogRef } from "@angular/material/dial
   styleUrl: "./posts.component.scss",
 })
 export class PostsComponent implements OnInit {
+  public usersData!: User[];
+
   @ViewChild("detailsDialogTemplate") detailsDialogTemplate!: TemplateRef<any>;
 
   public dataSource = new MatTableDataSource();
@@ -21,29 +25,45 @@ export class PostsComponent implements OnInit {
   public constructor(private userDataService: UserDataService, private dialog: MatDialog) {}
 
   public ngOnInit(): void {
-    forkJoin({
-      usersData: this.userDataService.getUsers(),
-      postsData: this.userDataService.getUsersPosts(),
-    }).subscribe({
-      next: (results: { usersData: any[]; postsData: any[] }) => {
-        this.dataSource.data = results.postsData.map((post) => {
-          const user = results.usersData.find((user) => user.id === post.userId);
-          return {
-            username: user ? user.username : "Unknown User",
-            title: post.title,
-            details: post.body,
-            id: user.id,
-          };
-        });
-        console.log("Combined Data:", this.dataSource);
-      },
-      error: (err) => {
-        console.error("Error fetching data:", err);
-      },
+    this.usersData = this.userDataService.usersData;
+
+    this.getUsersData();
+  }
+
+  private getUsersData(): void {
+    if (!this.usersData) {
+      this.userDataService
+        .getUsers()
+        .pipe(
+          tap((users: User[]) => {
+            this.usersData = users;
+          }),
+          switchMap(() => this.userDataService.getUsersPosts())
+        )
+        .subscribe((posts: Post[]) => this.processPosts(posts));
+    } else {
+      this.getUsersPostsData();
+    }
+  }
+
+  private getUsersPostsData(): void {
+    this.userDataService.getUsersPosts().subscribe((posts: Post[]) => this.processPosts(posts));
+  }
+
+  private processPosts(posts: Post[]): void {
+    this.dataSource.data = posts.map((post: Post) => {
+      const user = this.usersData.find((user: User) => user.id === post.userId);
+
+      return {
+        username: user && user.username,
+        title: post.title,
+        details: post.body,
+        id: user && user.id,
+      };
     });
   }
 
-  openDetailsDialog(data: any): void {
+  openDetailsDialog(data: { title: string; details: string }): void {
     const dialogRef: MatDialogRef<any> = this.dialog.open(this.detailsDialogTemplate, {
       width: "500px",
       data: { title: data.title, details: data.details },

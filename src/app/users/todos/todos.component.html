@@ -3,7 +3,7 @@
   <div class="todos">
     <ng-container *ngFor="let todo of activeUserToDoData">
       <div class="todos-item" [ngClass]="todo.completed ? 'todos-completed' : 'todos-incomplete'">
-        ({{ todo.id }}) {{ todo.title }}</div
+        {{ todo.title }}</div
       >
     </ng-container>
   </div>
