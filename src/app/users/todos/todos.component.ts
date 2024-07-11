@@ -17,7 +17,7 @@ export class ToDoComponent implements OnInit {
   public constructor(private route: ActivatedRoute, private userDataService: UserDataService) {}
 
   public ngOnInit(): void {
-    this.userId = +this.route.snapshot.params["userId"];
+    this.userId = +this.route.snapshot.params["id"];
 
     this.userDataService
       .getUsersToDo()

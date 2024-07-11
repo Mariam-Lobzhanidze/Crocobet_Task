@@ -1,5 +1,5 @@
 import { Component, OnInit, TemplateRef, ViewChild } from "@angular/core";
-import { UserDataService } from "../../services/userdata.service";
+import { UserDataService } from "../services/userdata.service";
 import { MatTableDataSource, MatTableModule } from "@angular/material/table";
 import { forkJoin } from "rxjs";
 import { MatButtonModule } from "@angular/material/button";
