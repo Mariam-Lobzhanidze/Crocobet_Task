@@ -22,11 +22,8 @@ export class ToDoComponent implements OnInit {
     this.userDataService
       .getUsersToDo()
       .pipe(map((todos: any[]) => todos.filter((todo) => todo.userId === this.userId)))
-      .subscribe((posts) => {
-        this.activeUserToDoData = posts;
-
-        // this.userDataService.userPostsData = this.activeUserPostsData;
-        console.log(this.activeUserToDoData);
+      .subscribe((todos) => {
+        this.activeUserToDoData = todos;
       });
   }
 }

@@ -14,16 +14,9 @@ import { CommonModule } from "@angular/common";
 })
 export class UsersComponent implements OnInit {
   public searchResultState = false;
+
   public dataSource = new MatTableDataSource();
-  public displayedColumns: String[] = [
-    "name",
-    "lastName",
-    "phone",
-    "email",
-    "company name",
-    "action",
-    "todo",
-  ];
+  public displayedColumns: String[] = ["name", "lastName", "phone", "email", "company name", "post", "todo"];
 
   public constructor(
     private usersDataService: UserDataService,
@@ -32,17 +25,22 @@ export class UsersComponent implements OnInit {
   ) {}
 
   public ngOnInit(): void {
-    this.usersDataService.getUsers().subscribe((usersData) => {
-      this.dataSource.data = usersData.map((user: any) => {
-        const [firstName, lastName] = user.name.split(" ");
+    this.usersDataService.getUsers().subscribe(
+      (usersData) => {
+        this.dataSource.data = usersData.map((user: any) => {
+          const [firstName, lastName] = user.name.split(" ");
 
-        return {
-          ...user,
-          firstName: firstName,
-          lastName: lastName,
-        };
-      });
-    });
+          return {
+            ...user,
+            firstName: firstName,
+            lastName: lastName,
+          };
+        });
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
   public onUserPostsPage(userId: number): void {

@@ -25,11 +25,13 @@ export class UserPostsCardsComponent implements OnInit {
     this.userDataService
       .getUsersPosts()
       .pipe(map((posts: any[]) => posts.filter((post) => post.userId === this.userId)))
-      .subscribe((posts) => {
-        this.activeUserPostsData = posts;
-
-        // this.userDataService.userPostsData = this.activeUserPostsData;
-        console.log(this.activeUserPostsData);
-      });
+      .subscribe(
+        (posts) => {
+          this.activeUserPostsData = posts;
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
   }
 }

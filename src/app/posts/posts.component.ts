@@ -26,7 +26,6 @@ export class PostsComponent implements OnInit {
       postsData: this.userDataService.getUsersPosts(),
     }).subscribe({
       next: (results: { usersData: any[]; postsData: any[] }) => {
-        // combine data(users and posts)
         this.dataSource.data = results.postsData.map((post) => {
           const user = results.usersData.find((user) => user.id === post.userId);
           return {
@@ -45,16 +44,9 @@ export class PostsComponent implements OnInit {
   }
 
   openDetailsDialog(data: any): void {
-    console.log(data);
-
     const dialogRef: MatDialogRef<any> = this.dialog.open(this.detailsDialogTemplate, {
       width: "500px",
-      data: { title: data.title, details: data.details }, // Pass data to the dialog
-    });
-
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log("Dialog closed with result:", result);
-      // Handle any logic after dialog closes
+      data: { title: data.title, details: data.details },
     });
   }
 }

@@ -6,7 +6,7 @@ import { Observable } from "rxjs";
   providedIn: "root",
 })
 export class UserDataService {
-  public userPostsData: any;
+  // public userPostsData: any;
   private baseUrl = "https://jsonplaceholder.typicode.com";
 
   constructor(private http: HttpClient) {}

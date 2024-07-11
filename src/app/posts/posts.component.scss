@@ -1,19 +1,32 @@
-table {
-  th {
-    color: #2f4858;
-    font-weight: 600;
-  }
-  .details-btn {
-    background-color: #2f4858;
-    color: #fff;
-    transition: all 0.3s ease;
-    position: relative;
-  }
+.posts-wrapper {
+  width: 50%;
+  margin: 0 auto;
+  padding: 0px 20px;
 
-  .details-btn:hover {
-    background-color: transparent;
-    color: #333;
+  table {
+    th {
+      color: #2f4858;
+      font-weight: 600;
+    }
+    .details-btn {
+      background-color: #2f4858;
+      color: #fff;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .details-btn:hover {
+      background-color: transparent;
+      color: #333;
+    }
   }
+}
+
+.actions button {
+  margin-top: 15px;
+  background-color: #dc787c;
+  color: #fff;
+  width: 100%;
 }
 
 .info {
@@ -32,10 +45,8 @@ table {
   }
 }
 
-.action-btn {
-  button {
-    margin-top: 15px;
-    background-color: #412728;
-    color: #fff;
+@media (max-width: 1024px) {
+  .posts-wrapper {
+    width: 80%;
   }
 }
