@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { UserDataService } from "../../services/userdata.service";
 import { map } from "rxjs";
 import { CardComponent } from "./card/card.component";
@@ -17,7 +17,11 @@ export class UserPostsCardsComponent implements OnInit {
   private userId: number | undefined;
   public activeUserPostsData!: Post[];
 
-  public constructor(private route: ActivatedRoute, private userDataService: UserDataService) {}
+  public constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private userDataService: UserDataService
+  ) {}
 
   public ngOnInit(): void {
     this.userId = +this.route.snapshot.params["id"];
@@ -33,5 +37,9 @@ export class UserPostsCardsComponent implements OnInit {
           console.log(error);
         }
       );
+  }
+
+  public goBackToUsersPage(): void {
+    this.router.navigate(["/users"]);
   }
 }

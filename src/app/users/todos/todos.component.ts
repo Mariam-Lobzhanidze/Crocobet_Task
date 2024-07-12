@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { UserDataService } from "../../services/userdata.service";
 import { map } from "rxjs";
 import { CommonModule } from "@angular/common";
@@ -15,7 +15,11 @@ import { Todo } from "../../interfaces/todo.interface";
 export class ToDoComponent implements OnInit {
   private userId: number | undefined;
   public activeUserToDoData!: Todo[];
-  public constructor(private route: ActivatedRoute, private userDataService: UserDataService) {}
+  public constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private userDataService: UserDataService
+  ) {}
 
   public ngOnInit(): void {
     this.userId = +this.route.snapshot.params["id"];
@@ -26,5 +30,9 @@ export class ToDoComponent implements OnInit {
       .subscribe((todos: Todo[]) => {
         this.activeUserToDoData = todos;
       });
+  }
+
+  public goBackToUsersPage(): void {
+    this.router.navigate(["/users"]);
   }
 }
